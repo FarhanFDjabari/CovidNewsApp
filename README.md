@@ -4,8 +4,8 @@ Covid News App is an application that can display global statistical information
 
 The reason for making this project is as a portfolio and fulfillment of final assignments for mobile application development courses.
 
-### Released App
-You can download the released version of this app on [this link](https://drive.google.com/file/d/1hD5Vw6RQUovqWBKvESaSTL6CbPYcDE_A/view?usp=sharing)
+### App Download
+You can download the pre-released version of this app on [this link](https://drive.google.com/file/d/1hD5Vw6RQUovqWBKvESaSTL6CbPYcDE_A/view?usp=sharing)
 
 ## Installation
 Clone this repository and import into **Android Studio**
