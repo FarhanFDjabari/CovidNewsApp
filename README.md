@@ -54,6 +54,7 @@ for teaching layout tutorial on his [youtube channel](https://youtube.com/haerul
 * To [Kawal Corona](https://kawalcorona.com/)
 for the corona statistic api
 * To [KawalCovid19](https://kawalcovid19.id/) for the image assets
-* To other developers on youtube for sharing their knowledge on Android development.
+* To other developers on youtube for sharing their knowledge on Android development
+* To my lecturer for teaching the basic theory of android development
 
 ## License
