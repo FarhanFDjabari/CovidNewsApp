@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".views.MainActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                app:collapsedTitleTextAppearance="@style/collapsedTitleStyle"
+                app:contentScrim="?attr/colorSecondary"
+                android:background="@color/bg"
+                android:elevation="0dp"
+                app:expandedTitleMarginBottom="20dp"
+                app:expandedTitleMarginStart="26dp"
+                app:collapsedTitleGravity="center_vertical"
+                app:expandedTitleTextAppearance="@style/expandedTitleStyle"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:title="Related News"
+                app:titleEnabled="true">
+
+                <RelativeLayout
+                    app:layout_collapseMode="parallax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mainBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/bg_2"
+                        android:contentDescription="Banner" />
+
+                    <TextView
+                        android:id="@+id/greetMsg"
+                        android:fontFamily="@font/book"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Hi, Welcome Back!"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/mainTitle"
+                        android:fontFamily="@font/bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/greetMsg"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="COVID-19 Statistic"
+                        android:textColor="@color/white"
+                        android:textSize="26sp"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rlViewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_alignTop="@+id/mainTitle">
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            android:foregroundGravity="center"/>
+
+                        <ProgressBar
+                            android:id="@+id/statisticLoading"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/updatedDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last Updated: 05 Mei 2021"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/rlViewPager"/>
+
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:theme="@style/Theme.CovidNewsApp.Toolbar"
+                    android:fitsSystemWindows="true"
+                    android:background="@android:color/transparent"
+                    android:elevation="0dp"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/Theme.CovidNewsApp.PopupOverlay"
+                    app:titleTextColor="@color/white" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:background="@drawable/bg_rounded_top"
+            android:backgroundTint="@color/sheet_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_anchor="@id/appBar"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="16dp">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:nestedScrollingEnabled="false"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:listitem="@layout/news_item"/>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <LinearLayout
+                android:id="@+id/errorLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:clickable="false"
+                android:focusable="false"
+                android:visibility="gone">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/error_image"
+                    app:lottie_autoPlay="true"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    app:lottie_rawRes="@raw/connection_error"
+                    android:layout_marginTop="100dp"/>
+
+                <TextView
+                    android:id="@+id/errorTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No data Found"
+                    android:textSize="18sp"
+                    android:textColor="@color/grey2"
+                    android:fontFamily="@font/bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/errorMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Please try again later"
+                    android:textColor="@color/grey2"
+                    android:fontFamily="@font/book"
+                    android:layout_marginHorizontal="16dp"
+                    android:textAlignment="center"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/shadow"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/sheet_color"
+                android:src="@drawable/bg_shadow_up_to_down"
+                android:visibility="visible" />
+
+            <ImageView
+                android:background="@drawable/bg_strip_round"
+                android:layout_width="40dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/collapse_menu_btn"
+        android:layout_width="26dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        app:tint="@color/white"
+        android:onClick="showPopup"
+        android:contentDescription="open menu"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_more_vert_24"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="end"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
