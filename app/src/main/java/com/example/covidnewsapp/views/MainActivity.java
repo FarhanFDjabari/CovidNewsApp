@@ -25,6 +25,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.covidnewsapp.BuildConfig;
 import com.example.covidnewsapp.R;
 import com.example.covidnewsapp.adapter.NewsAdapter;
 import com.example.covidnewsapp.adapter.StatisticAdapter;
@@ -37,10 +38,13 @@ import com.example.covidnewsapp.model.NewsModel;
 import com.example.covidnewsapp.model.StatisticModel;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     List<StatisticModel> statisticModelList;
     StatisticAdapter statisticAdapter;
     private Handler statisticHandler;
-    public static final String API_KEY = "615a4274fd3a42ab8e597d61d653bde5";
     private RecyclerView newsRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<ArticleModel> articles = new ArrayList<>();
@@ -313,8 +316,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         refreshLayout.setRefreshing(true);
 
         Call<NewsModel> call;
-        call = newsApiInterfaces.getNews("corona virus", "popularity", "en",
-                "20", Integer.toString(page), API_KEY);
+        call = newsApiInterfaces.getNews("corona virus", "relevancy", "en",
+                "20", Integer.toString(page), BuildConfig.API_KEY);
 
         call.enqueue(new Callback<NewsModel>() {
             @Override
