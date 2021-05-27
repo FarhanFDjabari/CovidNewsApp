@@ -55,7 +55,6 @@ for teaching layout tutorial on his [youtube channel](https://youtube.com/haerul
 for the corona statistic api
 * To [NewsAPI](https://newsapi.org/) for the news article data
 * To [KawalCovid19](https://kawalcovid19.id/) for the image assets
-* To other developers on youtube for sharing their knowledge on Android development
 * To my lecturer for teaching the basic theory of android development
 
 ## License
